@@ -24,10 +24,11 @@ export default function History() {
     const [userid, setUserId] = useState();
     const [docid, setDocId] = useState();
     const [aadharno, setAadharNo] = useState();
+    const [orgname,setOrgName] = useState();
     async function handleSubmit(e) {
         e.preventDefault();
-        let orgname = JSON.parse(sessionStorage.getItem('loggedorgname'));
-        console.log("orgname", orgname);
+        // let orgname = JSON.parse(sessionStorage.getItem('loggedorgname'));
+        // console.log("orgname", orgname);
         console.log("aadharno", aadharno);
         const res = await HistoryResources({
             "fcn": "history",
@@ -74,6 +75,12 @@ export default function History() {
                     <p>
                         <span>AADHAR NO&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" onChange={e => setAadharNo(e.target.value)} />
+                    </p>
+                </label>
+                <label>
+                    <p>
+                        <span>Org Name&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" onChange={e => setOrgName(e.target.value)} />
                     </p>
                 </label>
                 <label>

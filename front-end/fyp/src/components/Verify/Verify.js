@@ -20,10 +20,10 @@ async function addResources(credentials) {
 }
 
 export default function Verify() {
-    const [username, setUserName] = useState();
-    const [hash, setHash] = useState();
-    // const hash;
-    // const [file, setFile] = useState()
+    const [userid, setUserId] = useState();
+    const [docid, setDocId] = useState();
+    const [aadharno, setAadharNo] = useState();
+    const [orgname,setOrgName] = useState();
     async function handleSubmit(e) {
         e.preventDefault();
         const res = await addResources({
@@ -31,7 +31,7 @@ export default function Verify() {
             "peers": ["peer0.org1.example.com", "peer0.org2.example.com"],
             "chaincodeName": "basic",
             "channelName": "mychannel",
-            "args": [username]
+            "args": [orgname, userid, docid]
         });
         if (!res['result']['message']) {
             const element = "\n\nID DOES NOT EXIST";
@@ -87,10 +87,28 @@ export default function Verify() {
         <div className="login-wrapper">
             <h2>Inside Verification function</h2>
             <form onSubmit={handleSubmit}>
+            <label>
+                    <p>
+                        <span>AADHAR NO&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" onChange={e => setAadharNo(e.target.value)} />
+                    </p>
+                </label>
                 <label>
                     <p>
-                        <span>ID&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <input type="text" onChange={e => setUserName(e.target.value)} />
+                        <span>Org Name&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" onChange={e => setOrgName(e.target.value)} />
+                    </p>
+                </label>
+                <label>
+                    <p>
+                        <span>USER ID&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" onChange={e => setUserId(e.target.value)} />
+                    </p>
+                </label>
+                <label>
+                    <p>
+                        <span>DOC ID&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" onChange={e => setDocId(e.target.value)} />
                     </p>
                 </label>
                 <label>
