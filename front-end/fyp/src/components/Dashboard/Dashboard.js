@@ -52,7 +52,13 @@ export default function Dashboard() {
                     <Item><Link to="/CreatePrivateData" className="btn btn-primary">Create Private Resource</Link></Item>
                 </Grid>
                 <Grid item xs={12}>
-                    <Item><Link to="/Request" className="btn btn-primary">Request Resources</Link></Item>
+                    <Item><Link to="/Request" className="btn btn-primary">Request Private Resources</Link></Item>
+                </Grid>
+                <Grid item xs={12}>
+                    <Item><Link to="/AddCHR" className="btn btn-primary">Add/Replace CHR certificate</Link></Item>
+                </Grid>
+                <Grid item xs={12}>
+                    <Item><Link to="/QueryCHR" className="btn btn-primary">Query CHR certificate</Link></Item>
                 </Grid>
             </Grid>
         </Box>

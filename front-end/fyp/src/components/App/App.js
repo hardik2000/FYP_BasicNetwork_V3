@@ -12,9 +12,10 @@ import History from '../History/History';
 import Delete from '../Delete/Delete';
 import Verify from '../Verify/Verify';
 // import Register from '../Register/Register';
-import Request from '../Request/Request';
+import RequestPrivateData from '../RequestPrivateData/RequestPrivateData';
 import CreatePrivateData from '../CreatePrivateData/CreatePrivateData';
-
+import AddCHR from '../AddCHR/AddCHR';
+import QueryCHR from '../QueryCHR/QueryCHR';
 import getToken from './getToken';
 
 function App() {
@@ -44,8 +45,10 @@ function App() {
                     </Route>
                     <Route exact path="/Verify" element={<Verify />}>
                     </Route>
-                    <Route exact path="/Request" element={<Request />}></Route>
+                    <Route exact path="/RequestPrivateData" element={<RequestPrivateData />}></Route>
                     <Route exact path="/CreatePrivateData" element={<CreatePrivateData />}></Route>
+                    <Route exact path="/AddCHR" element={<AddCHR />}></Route>
+                    <Route exact path="/QueryCHR" element={<QueryCHR />}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Request.css';
+import './RequestPrivateData.css';
 import ReactDOM from 'react-dom'
 import { render } from 'react-dom';
 
@@ -17,7 +17,7 @@ async function queryResources(credentials) {
         },
     }).then(data => data.json())
 }
-export default function Request() {
+export default function RequestPrivateData() {
     const [docid, setDocId] = useState()
     const [rollname, setRollName] = useState();
     const [orgname, setOrgName] = useState();
@@ -56,7 +56,7 @@ export default function Request() {
 
     return (
         <div className="login-wrapper">
-            <h2>Inside Request function</h2>
+            <h2>Inside RequestPrivateData function</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>
@@ -66,13 +66,13 @@ export default function Request() {
                 </label>
                 <label>
                     <p>
-                        <span>ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span>USER ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" onChange={e => setRollName(e.target.value)} />
                     </p>
                 </label>
                 <label>
                     <p>
-                        <span>DOC Name&nbsp;&nbsp;&nbsp;</span>
+                        <span>DOC ID&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" onChange={e => setDocId(e.target.value)} />
                     </p>
                 </label>
@@ -88,5 +88,5 @@ export default function Request() {
     )
 }
 
-render(<Request />, document.getElementById('root'));
+render(<RequestPrivateData />, document.getElementById('root'));
 

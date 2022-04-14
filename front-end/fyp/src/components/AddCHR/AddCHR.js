@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Verify.css';
+import './AddCHR.css';
 import ReactDOM from 'react-dom'
 import { render } from 'react-dom';
 import { JSHash, CONSTANTS } from "react-native-hash";
@@ -7,6 +7,8 @@ import { JSHash, CONSTANTS } from "react-native-hash";
 
 async function addResources(credentials) {
     let token = JSON.parse(sessionStorage.getItem('token'));
+
+
     console.log("TOKEN ", token)
     return fetch('http://localhost:4000/channels/mychannel/chaincodes/basic', {
         method: 'POST',
@@ -19,46 +21,35 @@ async function addResources(credentials) {
         .then(data => data.json())
 }
 
-export default function Verify() {
+export default function AddCHR() {
     const [userid, setUserId] = useState();
-    const [docid, setDocId] = useState();
+    const [hash, setHash] = useState();
     const [aadharno, setAadharNo] = useState();
-    const [orgname,setOrgName] = useState();
-    const [hash,setHash] = useState();
+    // const hash;
+    // const [file, setFile] = useState()
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(aadharno)
+        let orgname = JSON.parse(sessionStorage.getItem('loggedorgname'));
+        console.log("orgname", orgname);
+        console.log("aadharno", aadharno);
         const res = await addResources({
-            "fcn": "query",
+            "fcn": "addChr",
             "peers": ["peer0.org1.example.com", "peer0.org2.example.com"],
             "chaincodeName": "basic",
             "channelName": "mychannel",
-            "args": [orgname, userid, docid]
+            "args": [orgname, userid, hash,aadharno]
         });
-        if (!res['result']['message']) {
-            const element = "\n\nID DOES NOT EXIST";
-            ReactDOM.render(element, document.getElementById('response'));
-            return;
-
-        }
-        if (hash === res['result']['result']['hash']) {
-            ReactDOM.render(
-                <div className="App">
-                    Document Verification Successfully : {res['result']['result']['id']}
-                    <br />
-                </div>,
-                document.getElementById('response')
-            );
-        }
-        else {
-            ReactDOM.render(
-                <div className="App">
-                    Document Verification Failed
-                </div>,
-                document.getElementById('response')
-            );
-        }
-
+        console.log(res['result'])
+        ReactDOM.render(
+            <div className="App">
+                {res['result']['message']}
+                <br />
+                ID : {res['result']['result']['id']}
+                <br />
+                HASH : {res['result']['result']['hash']}
+            </div>,
+            document.getElementById('response')
+        );
     }
 
     async function getHash(e) {
@@ -81,15 +72,16 @@ export default function Verify() {
                     .then(hash => setHash(hash), console.log(hash))
                     .catch(e => console.log(e));
 
+                // setHash("fileByteArray.toString()")
             }
         }
 
     }
     return (
         <div className="login-wrapper">
-            <h2>Inside Verification function</h2>
+            <h2>Inside Add CHR function</h2>
             <form onSubmit={handleSubmit}>
-            <label>
+                <label>
                     <p>
                         <span>AADHAR NO&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" onChange={e => setAadharNo(e.target.value)} />
@@ -97,20 +89,8 @@ export default function Verify() {
                 </label>
                 <label>
                     <p>
-                        <span>Org Name&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <input type="text" onChange={e => setOrgName(e.target.value)} />
-                    </p>
-                </label>
-                <label>
-                    <p>
                         <span>USER ID&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" onChange={e => setUserId(e.target.value)} />
-                    </p>
-                </label>
-                <label>
-                    <p>
-                        <span>DOC ID&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <input type="text" onChange={e => setDocId(e.target.value)} />
                     </p>
                 </label>
                 <label>
@@ -131,5 +111,5 @@ export default function Verify() {
     )
 }
 
-render(<Verify />, document.getElementById('root'));
+render(<AddCHR />, document.getElementById('root'));
 
