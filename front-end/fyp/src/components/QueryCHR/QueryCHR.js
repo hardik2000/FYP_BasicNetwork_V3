@@ -49,7 +49,7 @@ export default function QueryCHR() {
             "channelName": "mychannel",
             "args": [aadharno]
         });
-        if (!res['result']['message']) {
+        if (!res['result']['result']) {
             const element = "\n\nID DOES NOT EXIST";
             ReactDOM.render(element, document.getElementById('response'));
             return;
@@ -67,13 +67,24 @@ export default function QueryCHR() {
                 "channelName": "mychannel",
                 "args": [parameters[0],parameters[1],parameters[2]],
             });
-            result.push(
-            {
-                "ID":item['value']['id'],
-                "DOC ID":item['value']['hash'],
-                "HASH":hashval['result']['result']['hash']
-            })
-            console.log("hashval result",hashval['result']['result']['hash']);
+            if (!hashval['result']['result']) {
+                const element = "HASH DOES NOT EXIST";
+                result.push(
+                {
+                    "ID":item['value']['id'],
+                    "DOC ID":item['value']['hash'],
+                    "HASH":element
+                })
+            }
+            else{
+                result.push(
+                {
+                    "ID":item['value']['id'],
+                    "DOC ID":item['value']['hash'],
+                    "HASH":hashval['result']['result']['hash']
+                })
+            }
+            
         }
         
         

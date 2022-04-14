@@ -91,7 +91,7 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
             console.log(args[0], args[1], args[2], args[3])
             result = await contract.submitTransaction(fcn, args[0], args[1], "CHR", args[2], args[3]);
             console.log(result)
-            message = `Successfully added the asset with key ${args[0]} ${args[1]} ${args[2]} ${args[3]}`
+            message = `Successfully added the asset with key ${args[0]} ${args[1]} for Aadhar No ${args[3]}`
 
         } else if (fcn === "qChr") {
             console.log(args[0])

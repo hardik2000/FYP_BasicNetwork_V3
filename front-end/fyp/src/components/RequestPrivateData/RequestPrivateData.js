@@ -7,8 +7,6 @@ import { render } from 'react-dom';
 async function queryResources(credentials) {
 
     let token = JSON.parse(sessionStorage.getItem('token'));
-    console.log("TOKEN ", token)
-    console.log(`http://localhost:4000/channels/mychannel/chaincodes/basic?fcn=readPrivateDetails&args=${credentials['args']}&peers=["peer0.org1.example.com","peer0.org2.example.com"]`)
     return fetch(`http://localhost:4000/channels/mychannel/chaincodes/basic?fcn=readPrivateDetails&args=${credentials['args']}&peers=["peer0.org1.example.com","peer0.org2.example.com"]`, {
         method: 'GET',
         headers: {
@@ -60,7 +58,7 @@ export default function RequestPrivateData() {
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>
-                        <span>Org Name&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span>Requesting Org Name&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" onChange={e => setOrgName(e.target.value)} />
                     </p>
                 </label>
