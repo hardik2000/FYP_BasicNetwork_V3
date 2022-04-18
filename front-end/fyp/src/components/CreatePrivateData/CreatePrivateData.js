@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CreatePrivateData.css';
 import ReactDOM from 'react-dom'
 import { render } from 'react-dom';
-
+import FirebaseService from "../../services/firebase_service";
 async function createPrivateDataFun(credentials) {
     let token = JSON.parse(sessionStorage.getItem('token'));
 
@@ -37,6 +37,9 @@ export default function CreatePrivateData() {
             "args": [orgname, userid, docid, cert]
         });
         console.log(res['result'])
+        
+        var docname=orgname+"_"+userid+"_"+docid;
+        FirebaseService.setPermission(aadharno,docname,orgname);
         ReactDOM.render(
             <div className="App">
                 {res['result']['message']}

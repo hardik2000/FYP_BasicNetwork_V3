@@ -44,7 +44,7 @@ export default function Verify() {
         if (hash === res['result']['result']['hash']) {
             ReactDOM.render(
                 <div className="App">
-                    Document Verification Successfully : {res['result']['result']['id']}
+                    Document Verification Successful : {res['result']['result']['id']}
                     <br />
                 </div>,
                 document.getElementById('response')
